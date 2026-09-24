@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Join us · The Crochet Collective</title>
+  <meta name="description" content="Join the crochet collective: monthly challenges, show and tell, and friendly company.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2064%2064'%3E%3Ccircle%20cx%3D'32'%20cy%3D'32'%20r%3D'26'%20fill%3D'%23f6a9bd'%20stroke%3D'%2333465b'%20stroke-width%3D'4'%2F%3E%3Cpath%20d%3D'M12%2026%20C%2024%2034%2C%2040%2018%2C%2054%2030%20M10%2038%20C%2024%2046%2C%2042%2030%2C%2056%2042%20M20%2012%20C%2026%2030%2C%2036%2044%2C%2044%2056'%20fill%3D'none'%20stroke%3D'%2333465b'%20stroke-width%3D'3'%20stroke-linecap%3D'round'%2F%3E%3C%2Fsvg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Chewy&family=Patrick+Hand&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="site.css">
+</head><body class="site">
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+  <div class="wrap">
+    <a class="logo" href="index.html"><svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="26" fill="#f6a9bd" stroke="#33465b" stroke-width="4"/><path d="M12 26 C 24 34, 40 18, 54 30 M10 38 C 24 46, 42 30, 56 42 M20 12 C 26 30, 36 44, 44 56" fill="none" stroke="#33465b" stroke-width="3" stroke-linecap="round"/><path d="M54 48 C 60 54, 56 60, 48 58" fill="none" stroke="#33465b" stroke-width="3" stroke-linecap="round"/></svg><span>The Crochet Collective</span></a>
+    <input class="nav-toggle" type="checkbox" id="nav-toggle" aria-label="Toggle menu">
+    <label class="burger" for="nav-toggle" aria-hidden="true"><span></span><span></span><span></span></label>
+    <nav class="nav" aria-label="Main">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="challenges.html">Challenges</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="patterns.html">Patterns</a></li>
+        <li><a href="join.html" aria-current="page">Join us</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+<div class="page-head">
+  <svg class="doodle-star s1" viewBox="0 0 100 100" aria-hidden="true"><path d="M50 8 L61 36 L92 39 L68 59 L76 90 L49 73 L23 91 L31 60 L7 40 L38 36 Z"/></svg><svg class="doodle-star s2" viewBox="0 0 100 100" aria-hidden="true"><path d="M50 8 L61 36 L92 39 L68 59 L76 90 L49 73 L23 91 L31 60 L7 40 L38 36 Z"/></svg><svg class="doodle-star s3" viewBox="0 0 100 100" aria-hidden="true"><path d="M50 8 L61 36 L92 39 L68 59 L76 90 L49 73 L23 91 L31 60 L7 40 L38 36 Z"/></svg>
+  <div class="wrap">
+    <p class="kicker2">Pull up a stool</p>
+    <h1>Join us</h1>
+    <p class="lede">No experience needed. Just curiosity and yarn.</p>
+  </div>
+</div>
+<div class="wrap">
+  <div class="join-grid">
+
+    <section class="section">
+      <form class="paper tape-yellow" action="mailto:hello@thecrochetcollective.example" method="post" enctype="text/plain">
+        <!-- Demo form: replace the mailto address (or point action at your own form service). -->
+        <h2><span class="scribble">Pin me to the line</span></h2>
+        <label class="field"><span class="lbl">Your name</span><input type="text" name="name" autocomplete="given-name" required placeholder="Ada"></label>
+        <label class="field"><span class="lbl">Email</span><input type="email" name="email" autocomplete="email" required placeholder="you@example.com"></label>
+
+        <fieldset class="field" style="border:0;padding:0;margin:0 0 20px">
+          <legend class="lbl" style="font:400 1.25rem/1.2 var(--font-display);margin-bottom:6px;padding:0">How's your crochet?</legend>
+          <div class="pills">
+            <input type="radio" name="level" id="l1" value="new" checked><label for="l1">Brand new</label>
+            <input type="radio" name="level" id="l2" value="some"><label for="l2">A few projects</label>
+            <input type="radio" name="level" id="l3" value="lots"><label for="l3">Old hand</label>
+          </div>
+        </fieldset>
+
+        <fieldset class="field" style="border:0;padding:0;margin:0 0 20px">
+          <legend class="lbl" style="font:400 1.25rem/1.2 var(--font-display);margin-bottom:6px;padding:0">I'd love to make…</legend>
+          <div class="pills">
+            <input type="checkbox" name="likes" id="c1" value="wearables"><label for="c1">Wearables</label>
+            <input type="checkbox" name="likes" id="c2" value="bags"><label for="c2">Bags</label>
+            <input type="checkbox" name="likes" id="c3" value="critters"><label for="c3">Critters</label>
+            <input type="checkbox" name="likes" id="c4" value="blooms"><label for="c4">Flowers</label>
+          </div>
+        </fieldset>
+
+        <label class="field"><span class="lbl">Tell us about your Adornmment piece <small>(optional)</small></span><textarea name="message" placeholder="I'm making a tiny yellow hat because…"></textarea></label>
+        <ul class="checks field"><li><label><input type="checkbox" name="agree" required><span>I'm happy to be emailed the monthly challenge.</span></label></li></ul>
+        <button class="btn" type="submit">Send it on its way <svg class="d" viewBox="0 0 40 40" aria-hidden="true"><path d="M6 20 H32 M22 9 L33 20 L22 31"/></svg></button>
+        <p class="note-small" style="margin-top:14px">This opens your email app with your answers ready to send.</p>
+      </form>
+    </section>
+
+    <aside class="section">
+      <div class="paper blue tape-blue tilt-r">
+        <h2><span class="scribble">What you get</span></h2>
+        <div class="perks">
+          <div class="perk"><img src="assets/bee.webp" alt=""><div><h3>A monthly prompt</h3><p>One playful theme in your inbox on the first of the month.</p></div></div>
+          <div class="perk"><img src="assets/frog.webp" alt=""><div><h3>Show &amp; tell</h3><p>Your piece pinned on the gallery clothesline.</p></div></div>
+          <div class="perk"><img src="assets/mushroom.webp" alt=""><div><h3>Friendly patterns</h3><p>Step-by-step recipes for every skill level.</p></div></div>
+        </div>
+      </div>
+    </aside>
+
+  </div>
+
+  <section class="section">
+    <div class="paper sage tape-pink">
+      <h2><span class="scribble">Questions</span></h2>
+      <details class="acc"><summary>Does it cost anything?</summary><div><p>No. The collective is free and friendly. Just bring yarn.</p></div></details>
+      <details class="acc"><summary>What if I only know one stitch?</summary><div><p>You're in the right place. Try the <a href="patterns.html">granny square</a> and take it from there.</p></div></details>
+      <details class="acc"><summary>Do I have to share my photos?</summary><div><p>Only if you feel like it. Some members just enjoy the monthly prompt and the patterns.</p></div></details>
+    </div>
+  </section>
+</div>
+</main>
+<footer class="footer">
+  <div class="wrap">
+    <div>
+      <a class="logo" href="index.html"><svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="26" fill="#f6a9bd" stroke="#33465b" stroke-width="4"/><path d="M12 26 C 24 34, 40 18, 54 30 M10 38 C 24 46, 42 30, 56 42 M20 12 C 26 30, 36 44, 44 56" fill="none" stroke="#33465b" stroke-width="3" stroke-linecap="round"/><path d="M54 48 C 60 54, 56 60, 48 58" fill="none" stroke="#33465b" stroke-width="3" stroke-linecap="round"/></svg><span>The Crochet Collective</span></a>
+      <p>A tiny, friendly yarn club. Make something small, make it yours, hang it on the line.</p>
+      <img src="assets/d-heart.webp" alt="" width="90" style="filter:drop-shadow(0 2px 2px rgba(20,50,30,.5))">
+    </div>
+    <div>
+      <h3>Wander</h3>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="challenges.html">Challenges</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="patterns.html">Patterns</a></li>
+        <li><a href="join.html">Join us</a></li>
+      </ul>
+    </div>
+    <div>
+      <h3>This month</h3>
+      <ul>
+        <li><a href="challenges.html">January: Adornmment</a></li>
+        <li><a href="gallery.html">Peek at the gallery</a></li>
+        <li><a href="patterns.html">Beginner patterns</a></li>
+      </ul>
+    </div>
+    <p class="fine">Made with yarn, tea &amp; a lot of tangles · © The Crochet Collective</p>
+  </div>
+</footer>
+<a class="up" href="#main" aria-label="Back to top">↑</a>
+</body>
+</html>

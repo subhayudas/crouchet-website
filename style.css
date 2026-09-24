@@ -1,0 +1,341 @@
+/* ==========================================================
+   ADORNMMENT — January Challenge · The Crochet Collective
+   HTML + CSS only. Everything is positioned on a fixed design
+   grid and scaled with --u (1 design unit = width / grid width).
+
+   Three compositions:
+     desktop  ≥ 1000px  → 1600 × 1200 grid, landscape sky
+     tablet   641–999px → 1200 × 1697 grid, portrait poster
+     mobile   ≤ 640px   →  600 × 1380 grid, trimmed collage
+   Each item is placed by 4 numbers:  --x --y --w --r
+   (left, top, width, rotation in degrees)
+   ========================================================== */
+
+:root {
+  --sky: #a7c8d8;
+  --ink: rgba(28, 58, 86, .55);
+  --sw: min(100vw, 2200px);          /* stage width */
+  --W: 1600;                         /* grid width  */
+  --H: 1200;                         /* grid height */
+  --u: calc(var(--sw) / var(--W));   /* one design unit */
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body { margin: 0; background: var(--sky); }
+body { overflow-x: hidden; }
+
+/* ---------- scene / background ---------- */
+.scene {
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  height: calc(var(--H) * var(--u));
+  overflow: hidden;
+  background: var(--sky) url("assets/bg-desktop.jpg") center bottom / cover no-repeat;
+}
+
+/* mute the photo toward the paper-blue of the reference (sky only, clouds/grass keep colour) */
+.scene::before {
+  content: "";
+  position: absolute; inset: 0; z-index: 0;
+  background: rgba(167, 200, 216, .5);
+  -webkit-mask-image: linear-gradient(#000 0 55%, transparent 72%);
+          mask-image: linear-gradient(#000 0 55%, transparent 72%);
+  pointer-events: none;
+}
+
+/* subtle cardstock grain */
+.scene::after {
+  content: "";
+  position: absolute; inset: 0; z-index: 50;
+  pointer-events: none;
+  opacity: .22;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .45  0 0 0 0 .5  0 0 0 0 .55  0 0 0 .9 0'/></filter><rect width='240' height='240' filter='url(%23n)'/></svg>");
+}
+
+.stage {
+  position: relative; z-index: 2;
+  width: var(--sw);
+  height: calc(var(--H) * var(--u));
+  margin: 0 auto;
+}
+
+/* ---------- typography ---------- */
+.titles { position: absolute; inset: 0; pointer-events: none; }
+
+.kicker, .title, .subtitle, .brand {
+  position: absolute; margin: 0;
+  color: #fff;
+  font-weight: 400;
+  text-shadow:
+    0 calc(var(--u) * 3) 0 var(--ink),
+    0 0 calc(var(--u) * 10) rgba(30, 60, 90, .35);
+}
+
+.kicker {
+  left: calc(var(--kx) * var(--u));
+  top:  calc(var(--ky) * var(--u));
+  font: 400 calc(var(--kfs) * var(--u))/1 "Chewy", "Patrick Hand", cursive;
+  text-transform: uppercase;
+  letter-spacing: .02em;
+  transform: rotate(-1.5deg);
+}
+
+.title {
+  left: 0; width: 100%;
+  top: calc(var(--ty) * var(--u));
+  text-align: center;
+  font: 400 calc(var(--tfs) * var(--u))/1 "Chewy", "Patrick Hand", cursive;
+  text-transform: uppercase;
+  letter-spacing: .01em;
+  transform: rotate(-.8deg);
+  text-shadow:
+    0 calc(var(--u) * 5) 0 var(--ink),
+    0 0 calc(var(--u) * 16) rgba(30, 60, 90, .3);
+}
+
+.subtitle {
+  left: 50%;
+  width: calc(var(--sbw) * var(--u));
+  transform: translateX(-50%) rotate(-.4deg);
+  top: calc(var(--sby) * var(--u));
+  text-align: center;
+  font: 400 calc(var(--sbfs) * var(--u))/1.05 "Patrick Hand", "Chewy", cursive;
+  text-transform: uppercase;
+  letter-spacing: .02em;
+}
+
+.brand {
+  left: 0; width: 100%;
+  top: calc(var(--by) * var(--u));
+  text-align: center;
+  font: 400 calc(var(--bfs) * var(--u))/1 "Chewy", "Patrick Hand", cursive;
+  transform: rotate(-1deg);
+  text-shadow:
+    0 calc(var(--u) * 3) 0 rgba(32, 70, 40, .55),
+    0 0 calc(var(--u) * 10) rgba(20, 50, 30, .35);
+}
+
+/* hand-drawn stars */
+.star {
+  position: absolute;
+  left: calc(var(--x) * var(--u));
+  top:  calc(var(--y) * var(--u));
+  width: calc(var(--w) * var(--u));
+  height: auto; overflow: visible;
+  transform: rotate(calc(var(--r) * 1deg));
+  filter: drop-shadow(0 calc(var(--u) * 2) calc(var(--u) * 3) rgba(30, 60, 90, .45));
+}
+.star path {
+  fill: none; stroke: #fff;
+  stroke-width: 5; stroke-linejoin: round; stroke-linecap: round;
+}
+
+/* ---------- ropes ---------- */
+.rope {
+  position: absolute; left: -2%; width: 104%; z-index: 1;
+  top: calc(var(--ry) * var(--u));
+  height: calc(var(--u) * var(--rh));
+  border-radius: calc(var(--u) * 12);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.4) 0, rgba(255,255,255,0) 32%, rgba(60,35,5,.15) 62%, rgba(60,35,5,.5) 100%),
+    repeating-linear-gradient(72deg,
+      #c8993c 0, #e6c36c calc(var(--u) * 7), #f0d488 calc(var(--u) * 9),
+      #b98a2c calc(var(--u) * 14), #7d5919 calc(var(--u) * 18), #c8993c calc(var(--u) * 20));
+  box-shadow:
+    0 calc(var(--u) * 7) calc(var(--u) * 9) rgba(35, 60, 85, .28),
+    inset 0 calc(var(--u) * -2) 0 rgba(70, 40, 5, .35);
+}
+.rope-1 { --ry: var(--r1); transform: rotate(-.15deg); }
+.rope-2 { --ry: var(--r2); transform: rotate(.2deg); }
+
+/* ---------- hanging objects ---------- */
+.item, .pin {
+  position: absolute;
+  left: calc(var(--x) * var(--u));
+  top:  calc(var(--y) * var(--u));
+  width: calc(var(--w) * var(--u));
+  height: auto;
+  transform: rotate(calc(var(--r) * 1deg));
+  transform-origin: 50% 0;
+  user-select: none;
+}
+
+.item {
+  z-index: 3;
+  filter: drop-shadow(0 calc(var(--u) * 9) calc(var(--u) * 8) rgba(35, 60, 85, .3));
+}
+
+.pin {
+  z-index: 6;
+  filter: drop-shadow(calc(var(--u) * 2) calc(var(--u) * 5) calc(var(--u) * 4) rgba(35, 50, 70, .4));
+}
+
+/* things clipped to the ropes sit in front of the rope, behind pins */
+.flower-pink, .bow, .flower-yellow, .clover, .patch-blue, .cat { z-index: 4; transform-origin: 50% 50%; }
+.pouch-flower { z-index: 5; }
+.star-orange, .swirl, .apple { transform-origin: 50% 50%; }
+
+/* gentle swing — pure CSS */
+@keyframes sway {
+  from { transform: rotate(calc(var(--r) * 1deg - 1.2deg)); }
+  to   { transform: rotate(calc(var(--r) * 1deg + 1.2deg)); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .hat, .star-char, .pouch, .jelly, .doll, .scarf, .flower-blue, .skirt {
+    animation: sway 6s ease-in-out infinite alternate;
+  }
+  .star-char { animation-duration: 7.5s; animation-delay: -2s; }
+  .pouch     { animation-duration: 8s;   animation-delay: -4s; }
+  .jelly     { animation-duration: 5.2s; animation-delay: -1s; }
+  .scarf     { animation-duration: 9s;   animation-delay: -3s; }
+  .flower-blue { animation-duration: 7s; animation-delay: -5s; }
+  .skirt     { animation-duration: 6.5s; animation-delay: -2.5s; }
+}
+
+/* ==========================================================
+   DESKTOP  (default) — 1600 × 1200
+   ========================================================== */
+.scene { --r1: 385; --r2: 785; --rh: 30; }
+:root { --H: 1350; }
+
+.kicker   { --kx: 330; --ky: 62;  --kfs: 46; }
+.title    { --ty: 96;  --tfs: 190; }
+.subtitle { --sby: 300; --sbfs: 40; --sbw: 1200; }
+.brand    { --by: 1215; --bfs: 64; }
+
+.star-a { --x: 130;  --y: 175; --w: 88; --r: -12; }
+.star-b { --x: 1400; --y: 100; --w: 80; --r: 14; }
+.star-c { --x: 1480; --y: 165; --w: 46; --r: -8; }
+.star-d { --x: 1418; --y: 195; --w: 36; --r: 10; }
+
+/* row 1 */
+.hat            { --x: 230;  --y: 400; --w: 170; --r: -2; }
+.pin-hat        { --x: 246;  --y: 320; --w: 32;  --r: -3; }
+.flower-pink    { --x: 430;  --y: 335; --w: 105; --r: 8; }
+.star-char      { --x: 570;  --y: 400; --w: 160; --r: 3; }
+.pin-star       { --x: 624;  --y: 320; --w: 32;  --r: 2; }
+.bow            { --x: 780;  --y: 340; --w: 120; --r: -4; }
+.pouch          { --x: 940;  --y: 405; --w: 170; --r: -1; }
+.pin-pouch      { --x: 1035; --y: 322; --w: 32;  --r: 1; }
+.pouch-flower   { --x: 1050; --y: 540; --w: 70;  --r: 6; }
+.flower-yellow  { --x: 1160; --y: 355; --w: 85;  --r: -6; }
+.jelly          { --x: 1300; --y: 400; --w: 100; --r: 2; }
+.pin-jelly      { --x: 1330; --y: 318; --w: 32;  --r: 4; }
+
+/* row 2 */
+.clover         { --x: 110;  --y: 762; --w: 80;  --r: -8; }
+.doll           { --x: 200;  --y: 815; --w: 125; --r: 2; }
+.pin-doll       { --x: 226;  --y: 730; --w: 32;  --r: -2; }
+.scarf          { --x: 440;  --y: 815; --w: 150; --r: -1; }
+.pin-scarf      { --x: 502;  --y: 730; --w: 32;  --r: 3; }
+.patch-blue     { --x: 660;  --y: 760; --w: 80;  --r: 10; }
+.flower-blue    { --x: 760;  --y: 815; --w: 210; --r: -2; }
+.pin-bag        { --x: 850;  --y: 728; --w: 32;  --r: 1; }
+.cat            { --x: 1030; --y: 765; --w: 65;  --r: -3; }
+.skirt          { --x: 1130; --y: 815; --w: 240; --r: -5; }
+.pin-skirt      { --x: 1232; --y: 732; --w: 32;  --r: -2; }
+.star-orange    { --x: 1330; --y: 990; --w: 85;  --r: 12; }
+
+/* corner stickers */
+.swirl          { --x: 70;   --y: 1180; --w: 100; --r: 0; }
+.apple          { --x: 1440; --y: 1150; --w: 130; --r: -8; }
+
+/* ==========================================================
+   TABLET / portrait poster — 1200 × 1697
+   ========================================================== */
+@media (max-width: 999px) {
+  :root { --sw: 100vw; --W: 1200; --H: 1697; }
+  .scene {
+    --r1: 520; --r2: 1110; --rh: 30;
+    background-image: url("assets/bg.jpg");
+  }
+
+  .kicker   { --kx: 80;  --ky: 140; --kfs: 56; }
+  .title    { --ty: 190; --tfs: 175; }
+  .subtitle { --sby: 352; --sbfs: 42; --sbw: 1150; }
+  .brand    { --by: 1585; --bfs: 56; }
+
+  .star-a { --x: 40;  --y: 250; --w: 75; --r: -12; }
+  .star-b { --x: 1050;  --y: 125; --w: 78; --r: 14; }
+  .star-c { --x: 1115; --y: 175; --w: 46; --r: -8; }
+  .star-d { --x: 1070;  --y: 205; --w: 38; --r: 10; }
+
+  .hat            { --x: 80;   --y: 565;  --w: 200; --r: -2; }
+  .pin-hat        { --x: 66;   --y: 445;  --w: 38;  --r: -3; }
+  .flower-pink    { --x: 270;  --y: 480;  --w: 120; --r: 8; }
+  .star-char      { --x: 430;  --y: 565;  --w: 185; --r: 3; }
+  .pin-star       { --x: 476;  --y: 445;  --w: 38;  --r: 2; }
+  .bow            { --x: 615;  --y: 490;  --w: 125; --r: -4; }
+  .pouch          { --x: 738;  --y: 590;  --w: 220; --r: -1; }
+  .pin-pouch      { --x: 846;  --y: 445;  --w: 38;  --r: 1; }
+  .pouch-flower   { --x: 887;  --y: 707;  --w: 90;  --r: 6; }
+  .flower-yellow  { --x: 947;  --y: 480;  --w: 90;  --r: -6; }
+  .jelly          { --x: 1050; --y: 585;  --w: 130; --r: 2; }
+  .pin-jelly      { --x: 1076; --y: 445;  --w: 38;  --r: 4; }
+
+  .clover         { --x: 165;  --y: 1058; --w: 85;  --r: -8; }
+  .doll           { --x: 5;    --y: 1175; --w: 150; --r: 2; }
+  .pin-doll       { --x: 26;   --y: 1035; --w: 38;  --r: -2; }
+  .scarf          { --x: 300;  --y: 1200; --w: 160; --r: -1; }
+  .pin-scarf      { --x: 366;  --y: 1035; --w: 38;  --r: 3; }
+  .patch-blue     { --x: 555;  --y: 1067; --w: 90;  --r: 10; }
+  .flower-blue    { --x: 640;  --y: 1150; --w: 215; --r: -2; }
+  .pin-bag        { --x: 724;  --y: 1030; --w: 38;  --r: 1; }
+  .cat            { --x: 860;  --y: 1052; --w: 70;  --r: -3; }
+  .skirt          { --x: 920;  --y: 1150; --w: 275; --r: -5; }
+  .pin-skirt      { --x: 1031; --y: 1035; --w: 38;  --r: -2; }
+  .star-orange    { --x: 905;  --y: 1210; --w: 90;  --r: 12; }
+
+  .swirl          { --x: 25;   --y: 1545; --w: 90;  --r: 0; }
+  .apple          { --x: 1040; --y: 1550; --w: 130; --r: -8; }
+}
+
+/* ==========================================================
+   MOBILE — 600 × 1380 (fewer, smaller objects)
+   ========================================================== */
+@media (max-width: 640px) {
+  :root { --W: 600; --H: 1380; }
+  .scene { --r1: 458; --r2: 888; --rh: 22; }
+
+  .kicker   { --kx: 30;  --ky: 58;  --kfs: 30; }
+  .title    { --ty: 92;  --tfs: 88; }
+  .subtitle { --sby: 205; --sbfs: 29; --sbw: 500; }
+  .brand    { --by: 1295; --bfs: 40; }
+
+  .star-a { --x: 6;  --y: 168; --w: 34; --r: -12; }
+  .star-b { --x: 505; --y: 42;  --w: 40; --r: 14; }
+  .star-c { --x: 548; --y: 88;  --w: 24; --r: -8; }
+  .star-d { --x: 522; --y: 112; --w: 20; --r: 10; }
+
+  .hat            { --x: 25;  --y: 490; --w: 125; --r: -2; }
+  .pin-hat        { --x: 34;  --y: 410; --w: 22;  --r: -3; }
+  .flower-pink    { --x: 135; --y: 430; --w: 58;  --r: 8; }
+  .star-char      { --x: 165; --y: 490; --w: 110; --r: 3; }
+  .pin-star       { --x: 192; --y: 410; --w: 22;  --r: 2; }
+  .bow            { display: none; }
+  .pouch          { --x: 290; --y: 490; --w: 150; --r: -1; }
+  .pin-pouch      { --x: 366; --y: 410; --w: 22;  --r: 1; }
+  .pouch-flower   { --x: 388; --y: 560; --w: 46;  --r: 6; }
+  .flower-yellow  { --x: 405; --y: 432; --w: 50;  --r: -6; }
+  .jelly          { --x: 455; --y: 490; --w: 92;  --r: 2; }
+  .pin-jelly      { --x: 467; --y: 410; --w: 22;  --r: 4; }
+
+  .clover         { --x: 110; --y: 860; --w: 52;  --r: -8; }
+  .doll           { --x: 12;  --y: 915; --w: 105; --r: 2; }
+  .pin-doll       { --x: 29;  --y: 838; --w: 22;  --r: -2; }
+  .scarf          { --x: 150; --y: 915; --w: 115; --r: -1; }
+  .pin-scarf      { --x: 196; --y: 838; --w: 22;  --r: 3; }
+  .patch-blue     { display: none; }
+  .flower-blue    { --x: 290; --y: 915; --w: 150; --r: -2; }
+  .pin-bag        { --x: 351; --y: 836; --w: 22;  --r: 1; }
+  .cat            { --x: 268; --y: 862; --w: 42;  --r: -3; }
+  .skirt          { --x: 450; --y: 915; --w: 140; --r: -5; }
+  .pin-skirt      { --x: 505; --y: 838; --w: 22;  --r: -2; }
+  .star-orange    { --x: 505; --y: 1090; --w: 55; --r: 12; }
+
+  .swirl          { --x: 15;  --y: 1265; --w: 62; --r: 0; }
+  .apple          { --x: 495; --y: 1240; --w: 90; --r: -8; }
+}
