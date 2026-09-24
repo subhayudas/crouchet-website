@@ -201,7 +201,7 @@ body { overflow-x: hidden; }
 .scene { --r1: 385; --r2: 785; --rh: 30; }
 :root { --H: 1350; }
 
-.kicker   { --kx: 330; --ky: 62;  --kfs: 46; }
+.kicker   { --kx: 300; --ky: 22;  --kfs: 78; }
 .title    { --ty: 96;  --tfs: 190; }
 .subtitle { --sby: 300; --sbfs: 40; --sbw: 1200; }
 .brand    { --by: 1215; --bfs: 64; }
@@ -253,7 +253,7 @@ body { overflow-x: hidden; }
     background-image: url("assets/bg.jpg");
   }
 
-  .kicker   { --kx: 80;  --ky: 140; --kfs: 56; }
+  .kicker   { --kx: 70;  --ky: 95;  --kfs: 84; }
   .title    { --ty: 190; --tfs: 175; }
   .subtitle { --sby: 352; --sbfs: 42; --sbw: 1150; }
   .brand    { --by: 1585; --bfs: 56; }
@@ -300,9 +300,9 @@ body { overflow-x: hidden; }
   :root { --W: 600; --H: 1380; }
   .scene { --r1: 458; --r2: 888; --rh: 22; }
 
-  .kicker   { --kx: 30;  --ky: 58;  --kfs: 30; }
-  .title    { --ty: 92;  --tfs: 88; }
-  .subtitle { --sby: 205; --sbfs: 29; --sbw: 500; }
+  .kicker   { --kx: 24;  --ky: 40;  --kfs: 46; }
+  .title    { --ty: 90;  --tfs: 106; }
+  .subtitle { --sby: 235; --sbfs: 30; --sbw: 520; }
   .brand    { --by: 1295; --bfs: 40; }
 
   .star-a { --x: 6;  --y: 168; --w: 34; --r: -12; }
