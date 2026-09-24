@@ -553,3 +553,7 @@ table.abbr th { font: 400 1.15rem var(--font-display); color: var(--pink-d); }
 .p .ph img, .lb-card .ph img, .pat-top .ph img { position: absolute; inset: 10%; width: 80%; height: 80%; object-fit: contain; }
 .pat-top .ph img { inset: 14%; width: 72%; height: 72%; }
 .paper::before, .door::before, .p::before { filter: saturate(1.7) contrast(1.05); }
+
+/* shop prices */
+.p .cap small { display: inline-block; margin-top: 2px; padding: 0 .7em; font: 400 1.2rem/1.5 var(--font-display); color: var(--ink); background: var(--yellow); border: 2px solid var(--ink); border-radius: var(--wob-s); }
+.price-big { font: 400 2.2rem/1 var(--font-display); color: var(--pink-d); margin: 0 0 .4em; }
